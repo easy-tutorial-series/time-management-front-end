@@ -1,13 +1,16 @@
+import { Identity } from "type/utils"
+import { lsSet } from "util/local-storage"
+
 type loginParams = {
   name: string
   pwd: string
 }
-type User = {
-  id: number
-  name: string
-}
+type User = Identity
 const fakeUser: User = {
   id: 1,
   name: 'Jack'
 }
-export const userLogin = (p: loginParams) => new Promise(res => res(fakeUser))
+export const userLogin = (p: loginParams) => new Promise(res => {
+  lsSet({ key: 'access-token', value: 'token' })
+  return res(fakeUser)
+})
