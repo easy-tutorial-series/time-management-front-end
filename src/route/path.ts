@@ -1,4 +1,4 @@
 export const urlPath = {
-  login: './login',
+  login: '/login',
   home: '/home'
 }
