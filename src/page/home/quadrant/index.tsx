@@ -21,7 +21,7 @@ const Quadrant = (p: QuadrantProps) => {
         <div>
             <Box className={styles.quadrant}>
                 <Toolbar className={toolBarStyle(p.order)}>
-                    <Typography variant="subtitle1">{p.type}</Typography>
+                    <Typography variant="h5">{p.type}</Typography>
                 </Toolbar>
                 <Box overflow="scroll">{renderTasks(tasks, p.type)}</Box>
             </Box>
