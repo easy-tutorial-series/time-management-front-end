@@ -1,30 +1,21 @@
+import { Box } from "@material-ui/core"
 import React from "react"
-import { Box, Typography } from "@material-ui/core"
-import { useStyles } from "./index.style"
-import { TaskDataContainer, Task } from "context"
+import Quadrant from "./quadrant"
 
 export type HomePageProps = {}
 const HomePage = (p: HomePageProps) => {
-    const styles = useStyles()
-    const { tasks } = TaskDataContainer.useContainer()
     return (
         <div>
             <Box display="flex" flexDirection="row">
-                <Box className={styles.quadrant}>{renderTasks(tasks, "urgent-important")}</Box>
-                <Box className={styles.quadrant}>{renderTasks(tasks, "notUrgent-important")}</Box>
+                <Quadrant type="urgent-important" order={1} />
+                <Quadrant type="notUrgent-important" order={2} />
             </Box>
             <Box display="flex" flexDirection="row">
-                <Box className={styles.quadrant}>{renderTasks(tasks, "urgent-notImportant")}</Box>
-                <Box className={styles.quadrant}>
-                    {renderTasks(tasks, "notUrgent-notImportant")}
-                </Box>
+                <Quadrant type="urgent-notImportant" order={3} />
+                <Quadrant type="notUrgent-notImportant" order={4} />
             </Box>
         </div>
     )
 }
-
-const renderTasks = (tasks: Task[], type: Task["type"]) =>
-    tasks.filter((t) => t.type === type).map((t) => <Typography>{t.name}</Typography>)
-
 
 export default HomePage
