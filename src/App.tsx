@@ -6,20 +6,23 @@ import "./App.css"
 import LoginPage from "./page/login"
 import { ThemeProvider } from "@material-ui/core"
 import { muiTheme } from "style/mui-theme"
+import { TaskDataContainer } from "context"
 
 function App() {
     return (
         <ThemeProvider theme={muiTheme}>
-            <BrowserRouter>
-                <Switch>
-                    <Route path="/login">
-                        <LoginPage />
-                    </Route>
-                    <PrivateRouter>
-                        <HomePage />
-                    </PrivateRouter>
-                </Switch>
-            </BrowserRouter>
+            <TaskDataContainer.Provider>
+                <BrowserRouter>
+                    <Switch>
+                        <Route path="/login">
+                            <LoginPage />
+                        </Route>
+                        <PrivateRouter>
+                            <HomePage />
+                        </PrivateRouter>
+                    </Switch>
+                </BrowserRouter>
+            </TaskDataContainer.Provider>
         </ThemeProvider>
     )
 }
