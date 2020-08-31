@@ -1,6 +1,7 @@
 import { createContainer } from "unstated-next"
 import { Identity } from "type/utils"
 import { useState } from "react"
+import { max } from "ramda"
 
 export type Task = {
     desc: string
@@ -21,14 +22,13 @@ const useTask = () => {
         },
     ])
     const newTask = (type: Task["type"]) => {
-        setTasks(
-            tasks.concat({
-                id: tasks.length,
-                name: "new",
-                desc: "",
-                type,
-            })
-        )
+        const newTask = {
+            id: tasks.map((t) => t.id).reduce(max, 0) + 1,
+            name: "new",
+            desc: "",
+            type,
+        }
+        setTasks(tasks.concat(newTask))
     }
 
     const updateTask = (updatedTask: Task) => {
@@ -36,8 +36,9 @@ const useTask = () => {
         setTasks(result)
     }
 
-    const deleteTask = (updatedTask: Task) => {
-        const result = tasks.map((t) => (t.id === updatedTask.id ? updatedTask : t))
+    const deleteTask = (id: Task["id"]) => {
+        console.log(id)
+        const result = tasks.filter((t) => t.id !== id)
         setTasks(result)
     }
 

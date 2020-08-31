@@ -1,4 +1,5 @@
-import { Box, Toolbar, Typography, Button } from "@material-ui/core"
+import { Box, Button, Toolbar, Typography } from "@material-ui/core"
+import TaskCard, { TaskCardProps } from "component/task-card"
 import { Task, TaskDataContainer } from "context"
 import React from "react"
 import { useStyles } from "../index.style"
@@ -9,7 +10,7 @@ export type QuadrantProps = {
     order: QuadrantOrder
 }
 const Quadrant = (p: QuadrantProps) => {
-    const { tasks, newTask } = TaskDataContainer.useContainer()
+    const { tasks, newTask, deleteTask } = TaskDataContainer.useContainer()
     const styles = useStyles()
     const toolBarStyle = (o: QuadrantOrder) => {
         if (o === 1) return styles.quadrant1ToolBar
@@ -27,19 +28,32 @@ const Quadrant = (p: QuadrantProps) => {
                         new
                     </Button>
                 </Toolbar>
-                <Box overflow="scroll">{renderTasks(tasks, p.type)}</Box>
+                <Box
+                    overflow="scroll"
+                    maxHeight="30vh"
+                    display="flex"
+                    flexDirection="row"
+                    flexWrap="wrap"
+                >
+                    {renderTasks(tasks, p.type, () => {}, deleteTask)}
+                </Box>
             </Box>
         </div>
     )
 }
 
-const renderTasks = (tasks: Task[], type: Task["type"]) =>
+const renderTasks = (
+    tasks: Task[],
+    type: Task["type"],
+    onResolved: TaskCardProps["onResolved"],
+    onCancel: TaskCardProps["onCancel"]
+) =>
     tasks
         .filter((t) => t.type === type)
         .map((t) => (
-            <div key={t.id}>
-                <Typography>{t.name}</Typography>
-            </div>
+            <Box key={t.id} m={1}>
+                <TaskCard {...t} onResolved={onCancel} onCancel={onCancel} />
+            </Box>
         ))
 
 export default Quadrant
