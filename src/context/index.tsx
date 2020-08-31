@@ -24,7 +24,7 @@ const useTask = () => {
         setTasks(
             tasks.concat({
                 id: tasks.length,
-                name: "",
+                name: "new",
                 desc: "",
                 type,
             })

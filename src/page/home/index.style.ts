@@ -1,7 +1,11 @@
 import { makeStyles } from "@material-ui/core"
+import { CSSProperties } from "@material-ui/core/styles/withStyles"
 
-const quadrantToolBarBase = {
-  boxShadow: '2px 2px 2px grey'
+const quadrantToolBarBase: CSSProperties = {
+  boxShadow: '2px 2px 2px grey',
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between'
 }
 export const useStyles = makeStyles({
   quadrant: {

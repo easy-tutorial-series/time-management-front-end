@@ -1,4 +1,4 @@
-import { Box, Toolbar, Typography } from "@material-ui/core"
+import { Box, Toolbar, Typography, Button } from "@material-ui/core"
 import { Task, TaskDataContainer } from "context"
 import React from "react"
 import { useStyles } from "../index.style"
@@ -9,7 +9,7 @@ export type QuadrantProps = {
     order: QuadrantOrder
 }
 const Quadrant = (p: QuadrantProps) => {
-    const { tasks } = TaskDataContainer.useContainer()
+    const { tasks, newTask } = TaskDataContainer.useContainer()
     const styles = useStyles()
     const toolBarStyle = (o: QuadrantOrder) => {
         if (o === 1) return styles.quadrant1ToolBar
@@ -17,11 +17,15 @@ const Quadrant = (p: QuadrantProps) => {
         if (o === 3) return styles.quadrant3ToolBar
         if (o === 4) return styles.quadrant4ToolBar
     }
+    const onClick = () => newTask(p.type)
     return (
         <div>
             <Box className={styles.quadrant}>
                 <Toolbar className={toolBarStyle(p.order)}>
                     <Typography variant="h5">{p.type}</Typography>
+                    <Button variant="contained" onClick={onClick}>
+                        new
+                    </Button>
                 </Toolbar>
                 <Box overflow="scroll">{renderTasks(tasks, p.type)}</Box>
             </Box>

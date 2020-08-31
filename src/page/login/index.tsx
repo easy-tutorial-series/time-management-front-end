@@ -6,6 +6,7 @@ import {
     CardHeader,
     TextField,
     Typography,
+    ButtonGroup,
 } from "@material-ui/core"
 import React from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
@@ -79,16 +80,22 @@ const LoginPage = (p: LoginPageProps) => {
                             inputRef={registerRequiredField}
                         />
                     </Box>
-                    <Button variant="contained" color="primary" onClick={handleSubmit(onSubmit)}>
-                        sign in
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={() => alert("sing up not implemented")}
-                    >
-                        sign up
-                    </Button>
+                    <ButtonGroup>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleSubmit(onSubmit)}
+                        >
+                            sign in
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={() => alert("sing up not implemented")}
+                        >
+                            sign up
+                        </Button>
+                    </ButtonGroup>
                 </CardContent>
             </Card>
         </Box>
