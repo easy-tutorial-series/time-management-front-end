@@ -13,7 +13,7 @@ export type Task = {
 } & Identity
 
 export const useTask = () => {
-        const [tasks, setTasks] = useState<Task[]>([])
+    const [tasks, setTasks] = useState<Task[]>([])
     const newTask = (type: Task["type"]) => {
         const newTask = {
             id: tasks.map((t) => t.id).reduce(max, 0) + 1,

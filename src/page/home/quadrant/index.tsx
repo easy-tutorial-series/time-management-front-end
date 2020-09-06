@@ -10,7 +10,7 @@ export type QuadrantProps = {
     order: QuadrantOrder
 }
 const Quadrant = (p: QuadrantProps) => {
-    const { tasks, newTask, deleteTask } = TaskDataContainer.useContainer()
+    const { tasks, newTask, deleteTask, updateTask } = TaskDataContainer.useContainer()
     const styles = useStyles()
     const toolBarStyle = (o: QuadrantOrder) => {
         if (o === 1) return styles.quadrant1ToolBar
@@ -19,12 +19,19 @@ const Quadrant = (p: QuadrantProps) => {
         if (o === 4) return styles.quadrant4ToolBar
     }
     const onClick = () => newTask(p.type)
+    const onTaskDragStart: TaskCardProps["onDragStart"] = (e, t) => {
+        e.dataTransfer.setData("task", JSON.stringify(t))
+    }
+    const onTaskDrop = (e: React.DragEvent<HTMLDivElement>) => {
+        const task = JSON.parse(e.dataTransfer.getData("task"))
+        updateTask({ ...task, type: p.type })
+    }
     return (
-        <div>
+        <div onDragOver={(e) => e.preventDefault()} onDrop={onTaskDrop}>
             <Box className={styles.quadrant}>
                 <Toolbar className={toolBarStyle(p.order)}>
                     <Typography variant="h5">{p.type}</Typography>
-                    <Button variant="contained" onClick={onClick}>
+                    <Button variant="outlined" onClick={onClick}>
                         new
                     </Button>
                 </Toolbar>
@@ -35,7 +42,7 @@ const Quadrant = (p: QuadrantProps) => {
                     flexDirection="row"
                     flexWrap="wrap"
                 >
-                    {renderTasks(tasks, p.type, () => {}, deleteTask)}
+                    {renderTasks(tasks, p.type, () => {}, deleteTask, onTaskDragStart)}
                 </Box>
             </Box>
         </div>
@@ -46,13 +53,19 @@ const renderTasks = (
     tasks: Task[],
     type: Task["type"],
     onResolved: TaskCardProps["onResolved"],
-    onCancel: TaskCardProps["onCancel"]
+    onCancel: TaskCardProps["onCancel"],
+    onDragStart: TaskCardProps["onDragStart"]
 ) =>
     tasks
         .filter((t) => t.type === type)
         .map((t) => (
             <Box key={t.id} m={1}>
-                <TaskCard {...t} onResolved={onCancel} onCancel={onCancel} />
+                <TaskCard
+                    task={t}
+                    onResolved={onCancel}
+                    onCancel={onCancel}
+                    onDragStart={onDragStart}
+                />
             </Box>
         ))
 
