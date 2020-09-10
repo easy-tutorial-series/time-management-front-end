@@ -17,7 +17,7 @@ export const useTask = () => {
     const newTask = (type: Task["type"]) => {
         const newTask = {
             id: tasks.map((t) => t.id).reduce(max, 0) + 1,
-            name: "new",
+            name: "",
             desc: "",
             type,
         }
