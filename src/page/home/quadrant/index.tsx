@@ -5,30 +5,19 @@ import React from "react"
 import { useStyles } from "../index.style"
 import { colorMap } from "style/mui-theme"
 
-type QuadrantOrder = 1 | 2 | 3 | 4
+type QuadrantOrder = 0 | 1 | 2 | 3
 export type QuadrantProps = {
     type: Task["type"]
     order: QuadrantOrder
 }
 const Quadrant = (p: QuadrantProps) => {
     const { tasks, newTask, deleteTask, updateTask } = TaskDataContainer.useContainer()
-    const styles = useStyles({
-        quadrantOneColor: colorMap["urgent-important"],
-        quadrantTwoColor: colorMap["notUrgent-important"],
-        quadrantThreeColor: colorMap["urgent-notImportant"],
-        quadrantFourColor: colorMap["notUrgent-notImportant"],
-    })
-    const toolBarStyle = (o: QuadrantOrder) =>
-        o === 1
-            ? styles.quadrant1ToolBar
-            : o === 2
-            ? styles.quadrant2ToolBar
-            : o === 3
-            ? styles.quadrant3ToolBar
-            : o === 4
-            ? styles.quadrant4ToolBar
-            : ""
-
+    const styleList = [
+        useStyles({ bgColor: colorMap["urgent-important"] }),
+        useStyles({ bgColor: colorMap["notUrgent-important"] }),
+        useStyles({ bgColor: colorMap["urgent-notImportant"] }),
+        useStyles({ bgColor: colorMap["notUrgent-notImportant"] }),
+    ]
     const onClick = () => newTask(p.type)
     const onTaskDragStart: TaskCardProps["onDragStart"] = (e, t) => {
         e.dataTransfer.setData("task", JSON.stringify(t))
@@ -39,8 +28,8 @@ const Quadrant = (p: QuadrantProps) => {
     }
     return (
         <div onDragOver={(e) => e.preventDefault()} onDrop={onTaskDrop}>
-            <Box className={styles.quadrant}>
-                <Toolbar className={toolBarStyle(p.order)}>
+            <Box className={styleList[p.order].quadrant}>
+                <Toolbar className={styleList[p.order].toolbar}>
                     <Typography variant="h5">{p.type}</Typography>
                     <Button color="primary" variant="contained" onClick={onClick}>
                         new
@@ -56,7 +45,7 @@ const Quadrant = (p: QuadrantProps) => {
                     {renderTasks(
                         tasks,
                         p.type,
-                        () => {},
+                        deleteTask,
                         deleteTask,
                         onTaskDragStart,
                         updateTask,
@@ -85,7 +74,7 @@ const renderTasks = (
                     color={color}
                     task={t}
                     onTaskChange={onTaskChange}
-                    onResolved={onCancel}
+                    onResolved={onResolved}
                     onCancel={onCancel}
                     onDragStart={onDragStart}
                 />
