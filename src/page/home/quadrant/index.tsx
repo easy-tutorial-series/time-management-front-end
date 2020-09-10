@@ -2,7 +2,7 @@ import { Box, Button, Toolbar, Typography } from "@material-ui/core"
 import TaskCard, { TaskCardProps } from "component/task-card"
 import { Task, TaskDataContainer } from "context"
 import React from "react"
-import { useStyles } from "../index.style"
+import { useStyles } from "./index.style"
 import { colorMap } from "style/mui-theme"
 
 type QuadrantOrder = 0 | 1 | 2 | 3
