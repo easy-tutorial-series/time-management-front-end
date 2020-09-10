@@ -42,7 +42,7 @@ const Quadrant = (p: QuadrantProps) => {
                     flexDirection="row"
                     flexWrap="wrap"
                 >
-                    {renderTasks(tasks, p.type, () => {}, deleteTask, onTaskDragStart)}
+                    {renderTasks(tasks, p.type, () => {}, deleteTask, onTaskDragStart, updateTask)}
                 </Box>
             </Box>
         </div>
@@ -54,7 +54,8 @@ const renderTasks = (
     type: Task["type"],
     onResolved: TaskCardProps["onResolved"],
     onCancel: TaskCardProps["onCancel"],
-    onDragStart: TaskCardProps["onDragStart"]
+    onDragStart: TaskCardProps["onDragStart"],
+    onTaskChange: TaskCardProps["onTaskChange"]
 ) =>
     tasks
         .filter((t) => t.type === type)
@@ -62,6 +63,7 @@ const renderTasks = (
             <Box key={t.id} m={1}>
                 <TaskCard
                     task={t}
+                    onTaskChange={onTaskChange}
                     onResolved={onCancel}
                     onCancel={onCancel}
                     onDragStart={onDragStart}

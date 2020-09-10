@@ -1,11 +1,9 @@
 import {
-    Button,
+    Box, Button,
     ButtonGroup,
     Card,
-    CardContent,
-    CardHeader,
-    Typography,
-    Box,
+    CardActions, CardContent,
+    TextField
 } from "@material-ui/core"
 import { Task } from "context"
 import React from "react"
@@ -16,32 +14,52 @@ export type TaskCardProps = {
     onResolved: (id: Task["id"]) => any
     onCancel: (id: Task["id"]) => any
     onDragStart: (e: React.DragEvent<HTMLElement>, t: Task) => any
+    onTaskChange: (t: Task) => any
 }
+
 const TaskCard = (p: TaskCardProps) => {
     const styles = useStyles()
     return (
         <Box onDragStart={(e) => p.onDragStart(e, p.task)} draggable>
             <Card className={styles.card}>
-                <CardHeader title={p.task.name} />
                 <CardContent>
-                    <Typography>{p.task.desc}</Typography>
+                    <TextField
+                        fullWidth
+                        label="Name"
+                        placeholder="Give it a name"
+                        value={p.task.name}
+                        onChange={(e) => p.onTaskChange({ ...p.task, name: e.target.value })}
+                    />
+                    <Box mb={1} />
+                    <TextField
+                        multiline
+                        fullWidth
+                        label="Description"
+                        placeholder="How do you plan it?"
+                        value={p.task.desc}
+                        onChange={(e) => p.onTaskChange({ ...p.task, desc: e.target.value })}
+                    />
+                </CardContent>
+                <CardActions>
                     <ButtonGroup>
                         <Button
+                            color="primary"
                             size="small"
-                            variant="outlined"
+                            variant="contained"
                             onClick={() => p.onResolved(p.task.id)}
                         >
                             resolve
                         </Button>
                         <Button
+                            color="secondary"
                             size="small"
-                            variant="outlined"
+                            variant="contained"
                             onClick={() => p.onCancel(p.task.id)}
                         >
                             cancel
                         </Button>
                     </ButtonGroup>
-                </CardContent>
+                </CardActions>
             </Card>
         </Box>
     )
