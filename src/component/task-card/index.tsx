@@ -1,16 +1,19 @@
 import {
-    Box, Button,
+    Box,
+    Button,
     ButtonGroup,
     Card,
-    CardActions, CardContent,
-    TextField
+    CardActions,
+    CardContent,
+    TextField,
 } from "@material-ui/core"
 import { Task } from "context"
 import React from "react"
-import { useStyles } from "./index.style"
+import { useStyles, StyleProps } from "./index.style"
 
 export type TaskCardProps = {
     task: Task
+    color: StyleProps["bgColor"]
     onResolved: (id: Task["id"]) => any
     onCancel: (id: Task["id"]) => any
     onDragStart: (e: React.DragEvent<HTMLElement>, t: Task) => any
@@ -18,7 +21,7 @@ export type TaskCardProps = {
 }
 
 const TaskCard = (p: TaskCardProps) => {
-    const styles = useStyles()
+    const styles = useStyles({ bgColor: p.color })
     return (
         <Box onDragStart={(e) => p.onDragStart(e, p.task)} draggable>
             <Card className={styles.card}>

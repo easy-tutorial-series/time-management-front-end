@@ -3,6 +3,7 @@ import TaskCard, { TaskCardProps } from "component/task-card"
 import { Task, TaskDataContainer } from "context"
 import React from "react"
 import { useStyles } from "../index.style"
+import { colorMap } from "style/mui-theme"
 
 type QuadrantOrder = 1 | 2 | 3 | 4
 export type QuadrantProps = {
@@ -11,13 +12,23 @@ export type QuadrantProps = {
 }
 const Quadrant = (p: QuadrantProps) => {
     const { tasks, newTask, deleteTask, updateTask } = TaskDataContainer.useContainer()
-    const styles = useStyles()
-    const toolBarStyle = (o: QuadrantOrder) => {
-        if (o === 1) return styles.quadrant1ToolBar
-        if (o === 2) return styles.quadrant2ToolBar
-        if (o === 3) return styles.quadrant3ToolBar
-        if (o === 4) return styles.quadrant4ToolBar
-    }
+    const styles = useStyles({
+        quadrantOneColor: colorMap["urgent-important"],
+        quadrantTwoColor: colorMap["notUrgent-important"],
+        quadrantThreeColor: colorMap["urgent-notImportant"],
+        quadrantFourColor: colorMap["notUrgent-notImportant"],
+    })
+    const toolBarStyle = (o: QuadrantOrder) =>
+        o === 1
+            ? styles.quadrant1ToolBar
+            : o === 2
+            ? styles.quadrant2ToolBar
+            : o === 3
+            ? styles.quadrant3ToolBar
+            : o === 4
+            ? styles.quadrant4ToolBar
+            : ""
+
     const onClick = () => newTask(p.type)
     const onTaskDragStart: TaskCardProps["onDragStart"] = (e, t) => {
         e.dataTransfer.setData("task", JSON.stringify(t))
@@ -31,7 +42,7 @@ const Quadrant = (p: QuadrantProps) => {
             <Box className={styles.quadrant}>
                 <Toolbar className={toolBarStyle(p.order)}>
                     <Typography variant="h5">{p.type}</Typography>
-                    <Button variant="outlined" onClick={onClick}>
+                    <Button color="primary" variant="contained" onClick={onClick}>
                         new
                     </Button>
                 </Toolbar>
@@ -42,7 +53,15 @@ const Quadrant = (p: QuadrantProps) => {
                     flexDirection="row"
                     flexWrap="wrap"
                 >
-                    {renderTasks(tasks, p.type, () => {}, deleteTask, onTaskDragStart, updateTask)}
+                    {renderTasks(
+                        tasks,
+                        p.type,
+                        () => {},
+                        deleteTask,
+                        onTaskDragStart,
+                        updateTask,
+                        colorMap[p.type]
+                    )}
                 </Box>
             </Box>
         </div>
@@ -55,13 +74,15 @@ const renderTasks = (
     onResolved: TaskCardProps["onResolved"],
     onCancel: TaskCardProps["onCancel"],
     onDragStart: TaskCardProps["onDragStart"],
-    onTaskChange: TaskCardProps["onTaskChange"]
+    onTaskChange: TaskCardProps["onTaskChange"],
+    color: TaskCardProps["color"]
 ) =>
     tasks
         .filter((t) => t.type === type)
         .map((t) => (
             <Box key={t.id} m={1}>
                 <TaskCard
+                    color={color}
                     task={t}
                     onTaskChange={onTaskChange}
                     onResolved={onCancel}

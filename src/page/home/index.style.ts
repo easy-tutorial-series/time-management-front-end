@@ -7,6 +7,12 @@ const quadrantToolBarBase: CSSProperties = {
   flexDirection: 'row',
   justifyContent: 'space-between'
 }
+export type StyleProps = {
+  quadrantOneColor: string
+  quadrantTwoColor: string
+  quadrantThreeColor: string
+  quadrantFourColor: string
+}
 export const useStyles = makeStyles({
   quadrant: {
     width: '48vw',
@@ -17,19 +23,19 @@ export const useStyles = makeStyles({
     boxShadow: '8px 5px 5px grey'
   },
   quadrant1ToolBar: {
-    backgroundColor: '#FFADAD',
+    backgroundColor: (p: StyleProps) => p.quadrantOneColor,
     ...quadrantToolBarBase
   },
   quadrant2ToolBar: {
-    backgroundColor: '#FFD6A5',
+    backgroundColor: (p: StyleProps) => p.quadrantTwoColor,
     ...quadrantToolBarBase
   },
   quadrant3ToolBar: {
-    backgroundColor: '#FDFFB6',
+    backgroundColor: (p: StyleProps) => p.quadrantThreeColor,
     ...quadrantToolBarBase
   },
   quadrant4ToolBar: {
-    backgroundColor: '#CAFFBF',
+    backgroundColor: (p: StyleProps) => p.quadrantFourColor,
     ...quadrantToolBarBase
   }
 })
