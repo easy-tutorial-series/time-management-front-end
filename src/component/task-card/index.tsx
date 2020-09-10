@@ -32,7 +32,6 @@ const TaskCard = (p: TaskCardProps) => {
                     />
                     <Box mb={1} />
                     <TextField
-                        multiline
                         fullWidth
                         label="Description"
                         placeholder="How do you plan it?"
