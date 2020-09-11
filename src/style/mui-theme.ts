@@ -1,5 +1,5 @@
 import { unstable_createMuiStrictModeTheme as createMuiTheme } from "@material-ui/core"
-import { Task } from "context"
+import { Task } from "context/task"
 
 export const muiTheme = createMuiTheme({
   typography: {

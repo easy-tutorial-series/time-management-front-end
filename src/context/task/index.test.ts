@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react-hooks"
-import { useTask } from "context"
+import { useTask } from "context/task"
 
 test('should create new card', () => {
   const { result } = renderHook(useTask)
