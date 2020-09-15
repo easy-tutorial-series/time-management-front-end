@@ -1,7 +1,6 @@
-import { createContainer } from "unstated-next"
-import { Identity } from "type/utils"
-import { useState } from "react"
 import { max } from "ramda"
+import { useState } from "react"
+import { Identity } from "type/utils"
 
 export type Task = {
     desc: string
@@ -37,4 +36,3 @@ export const useTask = () => {
 
     return { tasks, deleteTask, updateTask, newTask }
 }
-export const TaskDataContainer = createContainer(useTask)

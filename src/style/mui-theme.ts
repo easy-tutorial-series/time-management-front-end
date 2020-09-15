@@ -1,7 +1,10 @@
-import { unstable_createMuiStrictModeTheme as createMuiTheme } from "@material-ui/core"
+import { unstable_createMuiStrictModeTheme as createMuiTheme, Theme } from "@material-ui/core"
 import { Task } from "context/task"
 
-export const muiTheme = createMuiTheme({
+export const muiTheme = (type: Theme['palette']['type']) => createMuiTheme({
+  palette: {
+    type: type
+  },
   typography: {
     fontFamily: 'Roboto Slab'
   }
