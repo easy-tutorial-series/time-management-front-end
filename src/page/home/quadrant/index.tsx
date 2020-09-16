@@ -5,6 +5,7 @@ import { Task } from "context/task"
 import React from "react"
 import { colorMap } from "style/mui-theme"
 import { useStyles } from "./index.style"
+import Anim from "component/anim"
 
 type QuadrantOrder = 0 | 1 | 2 | 3
 export type QuadrantProps = {
@@ -71,14 +72,16 @@ const renderTasks = (
         .filter((t) => t.type === type)
         .map((t) => (
             <Box key={t.id} m={1}>
-                <TaskCard
-                    color={color}
-                    task={t}
-                    onTaskChange={onTaskChange}
-                    onResolved={onResolved}
-                    onCancel={onCancel}
-                    onDragStart={onDragStart}
-                />
+                <Anim type="bounceIn">
+                    <TaskCard
+                        color={color}
+                        task={t}
+                        onTaskChange={onTaskChange}
+                        onResolved={onResolved}
+                        onCancel={onCancel}
+                        onDragStart={onDragStart}
+                    />
+                </Anim>
             </Box>
         ))
 
