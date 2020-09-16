@@ -3,10 +3,18 @@ import { Task } from "context/task"
 
 export const muiTheme = (type: Theme['palette']['type']) => createMuiTheme({
   palette: {
-    type: type
+    type: type,
   },
   typography: {
-    fontFamily: 'Roboto Slab'
+    fontFamily: 'Roboto Slab',
+  },
+  overrides: {
+    MuiTypography: {
+      root: {
+        display: 'flex',
+        alignItems: 'center'
+      }
+    }
   }
 })
 

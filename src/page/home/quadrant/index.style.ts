@@ -10,7 +10,7 @@ export const useStyles = makeStyles({
     margin: '8px',
     border: '1px solid grey',
     borderRadius: '5px',
-    boxShadow: '8px 5px 5px grey',
+    boxShadow: '2px 2px 2px grey',
   },
   toolbar: {
     boxShadow: '2px 2px 2px grey',

@@ -13,7 +13,9 @@ const CusAppBar = (p: CusAppBarProps) => {
         <AppBar position="static">
             <Toolbar>
                 <Box width="100%" display="flex" flexDirection="row" justifyContent="space-between">
-                    <Typography variant="h5">Time Management Tool</Typography>
+                    <Typography variant="h5">
+                        Time Management Tool
+                    </Typography>
                     <ToggleButtonGroup exclusive value={themeMode} onChange={onToggleChange}>
                         <ToggleButton value="dark">
                             <NightsStay />
