@@ -1,4 +1,5 @@
-import { Task } from 'state-management/task'
+import { Task } from 'model/theme'
+
 
 type LocalStorageData = {
     'access-token': string,

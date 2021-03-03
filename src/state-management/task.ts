@@ -1,17 +1,8 @@
+import { Task } from 'model/theme'
 import { max } from 'ramda'
 import { atom, useRecoilState } from 'recoil'
-import { Identity } from 'type/utils'
 import { isArray } from 'util/collection'
 import { lsGet, lsSet } from 'util/local-storage'
-
-export type Task = {
-    desc: string
-    type:
-    | "urgent-important"
-    | "urgent-notImportant"
-    | "notUrgent-important"
-    | "notUrgent-notImportant"
-} & Identity
 
 const taskStateKey = 'taskStateKey'
 

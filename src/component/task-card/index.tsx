@@ -7,8 +7,8 @@ import {
     CardContent,
     TextField,
 } from "@material-ui/core"
+import { Task } from 'model/theme'
 import React from "react"
-import { Task } from 'state-management/task'
 import { useStyles, StyleProps } from "./index.style"
 
 export type TaskCardProps = {

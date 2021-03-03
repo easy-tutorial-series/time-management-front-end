@@ -1,7 +1,7 @@
-import { Theme } from '@material-ui/core'
+import { ThemeType } from 'model/task'
 import { atom } from 'recoil'
 
-export type ThemeType = Theme['palette']['type']
+
 const themeStateKey = 'themeStateKey'
 
 export const themeState = atom<ThemeType>({

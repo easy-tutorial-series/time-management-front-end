@@ -1,9 +1,10 @@
 import { Box, Button, Toolbar, Typography } from "@material-ui/core"
 import Anim from "component/anim"
 import TaskCard, { TaskCardProps } from "component/task-card"
+import { Task } from 'model/theme'
 
 import React from "react"
-import { Task, useTaskState } from 'state-management/task'
+import { useTaskState } from 'state-management/task'
 import { colorMap } from "style/mui-theme"
 import { useStyles } from "./index.style"
 

@@ -1,5 +1,6 @@
 import { unstable_createMuiStrictModeTheme as createMuiTheme, Theme } from "@material-ui/core"
-import { Task } from 'state-management/task'
+import { Task } from 'model/theme'
+
 
 
 export const muiTheme = (type: Theme['palette']['type']) => createMuiTheme({

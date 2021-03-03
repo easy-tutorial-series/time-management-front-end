@@ -1,9 +1,10 @@
 import { AppBar, Box, Toolbar, Typography } from "@material-ui/core"
 import { NightsStay, WbSunny } from "@material-ui/icons"
 import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab"
+import { ThemeType } from 'model/task'
 import React from "react"
 import { useRecoilState } from 'recoil'
-import { themeState, ThemeType } from 'state-management/theme'
+import { themeState } from 'state-management/theme'
 
 export type CusAppBarProps = {}
 const CusAppBar = (p: CusAppBarProps) => {
