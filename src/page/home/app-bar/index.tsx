@@ -1,14 +1,15 @@
-import { AppBar, Toolbar, Typography, Box } from "@material-ui/core"
-import { ToggleButtonGroup, ToggleButton } from "@material-ui/lab"
-import React from "react"
+import { AppBar, Box, Toolbar, Typography } from "@material-ui/core"
 import { NightsStay, WbSunny } from "@material-ui/icons"
-import { DataContainer } from "context"
-import { ThemeType } from "context/theme"
+import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab"
+import React from "react"
+import { useRecoilState } from 'recoil'
+import { themeState, ThemeType } from 'state-management/theme'
 
 export type CusAppBarProps = {}
 const CusAppBar = (p: CusAppBarProps) => {
-    const { themeMode, setThemeMode } = DataContainer.useContainer().themeMode
-    const onToggleChange = (_: any, value: ThemeType) => setThemeMode(value)
+    const [themeMode, setThemeMode] = useRecoilState(themeState)
+
+    const onToggleChange = (_: any, value: ThemeType) => setThemeMode(() => value)
     return (
         <AppBar position="static">
             <Toolbar>

@@ -1,11 +1,11 @@
 import { Box, Button, Toolbar, Typography } from "@material-ui/core"
+import Anim from "component/anim"
 import TaskCard, { TaskCardProps } from "component/task-card"
-import { DataContainer } from "context"
-import { Task } from "context/task"
+
 import React from "react"
+import { Task, useTaskState } from 'state-management/task'
 import { colorMap } from "style/mui-theme"
 import { useStyles } from "./index.style"
-import Anim from "component/anim"
 
 type QuadrantOrder = 0 | 1 | 2 | 3
 export type QuadrantProps = {
@@ -13,7 +13,7 @@ export type QuadrantProps = {
     order: QuadrantOrder
 }
 const Quadrant = (p: QuadrantProps) => {
-    const { tasks, newTask, deleteTask, updateTask } = DataContainer.useContainer().task
+    const { tasks, newTask, deleteTask, updateTask } = useTaskState()
     const styleList = [
         useStyles({ bgColor: colorMap["urgent-important"] }),
         useStyles({ bgColor: colorMap["notUrgent-important"] }),
