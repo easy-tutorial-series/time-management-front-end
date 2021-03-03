@@ -17,11 +17,11 @@ const taskStateKey = 'taskStateKey'
 
 const taskState = atom<Task[]>({
     key: taskStateKey,
-    default: lsGet('tasks'),
+    default: lsGet('tasks') ?? [],
     effects_UNSTABLE: [
         ({ onSet }) => {
             onSet(v => {
-                if (isArray(v)) lsSet({ key: 'tasks', value: v })
+                if (isArray(v)) lsSet('tasks', v)
             })
         }
     ]

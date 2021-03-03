@@ -1,15 +1,16 @@
 import { Task } from 'state-management/task'
 
-export type LocalStorageKeyValuePairs =
-    | { key: 'access-token', value: string }
-    | { key: 'default-theme', value: 'dark' | 'light' }
-    | { key: 'tasks', value: Task[] }
-
-export const lsSet = (p: LocalStorageKeyValuePairs) => {
-    localStorage.setItem(p.key, JSON.stringify(p.value))
+type LocalStorageData = {
+    'access-token': string,
+    'default-theme': 'dark' | 'light',
+    'tasks': Task[],
 }
 
-export const lsGet = (k: LocalStorageKeyValuePairs['key']) => {
+export const lsSet = <K extends keyof LocalStorageData>(k: K, v: LocalStorageData[K]) => {
+    localStorage.setItem(k, JSON.stringify(v))
+}
+
+export const lsGet = <K extends keyof LocalStorageData>(k: K): LocalStorageData[K] | undefined => {
     const result = localStorage.getItem(k)
     return result ? JSON.parse(result) : undefined
 }

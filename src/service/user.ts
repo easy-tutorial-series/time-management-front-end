@@ -2,15 +2,15 @@ import { Identity } from "type/utils"
 import { lsSet } from "util/local-storage"
 
 type loginParams = {
-  name: string
-  pwd: string
+    name: string
+    pwd: string
 }
 type User = Identity
 const fakeUser: User = {
-  id: 1,
-  name: 'Jack'
+    id: 1,
+    name: 'Jack'
 }
 export const userLogin = (p: loginParams) => new Promise(res => {
-  lsSet({ key: 'access-token', value: 'token' })
-  return res(fakeUser)
+    lsSet('access-token', 'token')
+    return res(fakeUser)
 })
