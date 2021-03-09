@@ -1,4 +1,4 @@
-import { Task } from 'model/theme'
+import { Task } from 'model/task'
 
 
 type LocalStorageData = {

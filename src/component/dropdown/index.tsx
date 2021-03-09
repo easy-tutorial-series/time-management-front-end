@@ -1,7 +1,7 @@
 import { InputAdornment, MenuItem, MenuList, Paper, Popper, TextField } from "@material-ui/core"
 import { ArrowDropDown } from "@material-ui/icons"
 import React, { useState } from "react"
-import { Identity } from "../../type/utils"
+import { Identity } from "../../util/type-utils"
 
 export type Option = Identity
 

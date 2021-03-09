@@ -1,4 +1,4 @@
-import { Identity } from "type/utils"
+import { Identity } from "util/type-utils"
 import { lsSet } from "util/local-storage"
 
 type loginParams = {

@@ -1,10 +1,3 @@
-import { Identity } from 'type/utils'
+import { Theme } from '@material-ui/core'
 
-export type Task = {
-    desc: string
-    type:
-    | "urgent-important"
-    | "urgent-notImportant"
-    | "notUrgent-important"
-    | "notUrgent-notImportant"
-} & Identity
+export type ThemeType = Theme['palette']['type']

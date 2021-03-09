@@ -1,4 +1,4 @@
-import { ThemeType } from 'model/task'
+import { ThemeType } from 'model/theme'
 import { atom } from 'recoil'
 
 

@@ -1,5 +1,4 @@
-import { unstable_createMuiStrictModeTheme as createMuiTheme, Theme } from "@material-ui/core"
-import { Task } from 'model/theme'
+import { Theme, unstable_createMuiStrictModeTheme as createMuiTheme } from "@material-ui/core"
 
 
 
@@ -20,10 +19,13 @@ export const muiTheme = (type: Theme['palette']['type']) => createMuiTheme({
     }
 })
 
-export const colorMap: { [key in Task['type']]: string } = {
-    "urgent-important": '#e8505b',
-    "urgent-notImportant": '#f9d56e',
-    "notUrgent-important": '#f3ecc2',
-    "notUrgent-notImportant": '#14b1ab'
+export const colorMap = {
+    'urgent-important': '#e8505b',
+    'urgent-notImportant': '#f9d56e',
+    'notUrgent-important': '#f3ecc2',
+    'notUrgent-notImportant': '#14b1ab',
+    'success': '#2a9d8f',
+    'fail': '#e76f51',
+    'warning': '#f4a261'
 }
 

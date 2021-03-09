@@ -1,7 +1,8 @@
-import { Task } from 'model/theme'
+import { isTaskOnGoing, isTaskRejected, isTaskResolved, Task } from 'model/task'
 import { max } from 'ramda'
 import { atom, useRecoilState } from 'recoil'
 import { isArray } from 'util/collection'
+import { unixTimestampNow } from 'util/date'
 import { lsGet, lsSet } from 'util/local-storage'
 
 const taskStateKey = 'taskStateKey'
@@ -20,11 +21,24 @@ const taskState = atom<Task[]>({
 
 export const useTaskState = () => {
     const [tasks, setTasks] = useRecoilState(taskState)
+
+    /* -------------------------------------------------------------------------- */
+    /*                                    READ                                    */
+    /* -------------------------------------------------------------------------- */
+    const resolvedTasks = () => tasks.filter(isTaskResolved)
+    const rejectedTasks = () => tasks.filter(isTaskRejected)
+    const onGoingTasks = () => tasks.filter(isTaskOnGoing)
+    const historicTasks = () => tasks.filter(t => isTaskRejected(t) || isTaskResolved(t))
+
+    /* -------------------------------------------------------------------------- */
+    /*                                    WRITE                                   */
+    /* -------------------------------------------------------------------------- */
     const newTask = (type: Task["type"]) => {
         setTasks(tasks => {
+            const id = tasks.map((t) => t.id).reduce(max, 0) + 1
             const newTask = {
-                id: tasks.map((t) => t.id).reduce(max, 0) + 1,
-                name: "",
+                id,
+                name: `task${id}`,
                 desc: "",
                 type,
             }
@@ -39,14 +53,21 @@ export const useTaskState = () => {
         })
     }
 
-    const deleteTask = (id: Task["id"]) => {
+    const rejectTask = (id: Task["id"]) => {
         setTasks(tasks => {
-            const result = tasks.filter((t) => t.id !== id)
+            const result = tasks.map((t) => t.id === id ? { ...t, rejectedTime: unixTimestampNow() } : t)
+            return result
+        })
+    }
+
+    const resolveTask = (id: Task["id"]) => {
+        setTasks(tasks => {
+            const result = tasks.map((t) => t.id === id ? { ...t, resolvedTime: unixTimestampNow() } : t)
             return result
         })
     }
 
     return {
-        newTask, updateTask, deleteTask, tasks
+        newTask, updateTask, rejectTask, resolveTask, resolvedTasks, rejectedTasks, onGoingTasks, historicTasks
     }
 }

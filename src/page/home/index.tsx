@@ -1,13 +1,11 @@
 import { Box } from "@material-ui/core"
 import React from "react"
-import CusAppBar from "./app-bar"
 import Quadrant from "./quadrant"
 
 export type HomePageProps = {}
 const HomePage = (p: HomePageProps) => {
     return (
         <div>
-            <CusAppBar />
             <Box mt={5}>
                 <Box display="flex" flexDirection="row">
                     <Quadrant type="urgent-important" order={0} />

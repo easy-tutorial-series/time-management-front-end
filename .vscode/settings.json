@@ -1,5 +1,7 @@
 {
     "typescript.format.semicolons": "remove",
     "javascript.format.semicolons": "remove",
-    "editor.tabSize": 4
+    "editor.tabSize": 4,
+    "prettier.singleQuote": true,
+    "prettier.jsxSingleQuote": true
 }
