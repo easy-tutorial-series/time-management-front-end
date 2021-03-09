@@ -2,13 +2,15 @@ import { not, isNil } from 'ramda'
 import { Identity } from 'util/type-utils'
 import { UnixTimestamp } from 'util/date'
 
-export type Task = {
-    desc: string
-    type:
+type TaskType =
     | "urgent-important"
     | "urgent-notImportant"
     | "notUrgent-important"
     | "notUrgent-notImportant"
+
+export type Task = {
+    desc: string
+    type: TaskType
     resolvedTime?: UnixTimestamp
     rejectedTime?: UnixTimestamp
 } & Identity
