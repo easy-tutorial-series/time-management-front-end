@@ -6,7 +6,7 @@ export type StyleProps = {
 export const useStyles = makeStyles({
   quadrant: {
     width: '48vw',
-    height: '48vh',
+    height: '40vh',
     margin: '8px',
     border: '1px solid grey',
     borderRadius: '5px',
