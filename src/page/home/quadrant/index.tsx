@@ -1,6 +1,6 @@
 import { Box, Button, Toolbar, Typography } from "@material-ui/core"
 import Anim from "component/anim"
-import TaskCard, { TaskCardProps } from "component/task-card"
+import TaskCardEdit, { TaskCardProps } from "component/task-card/edit"
 import { Task } from 'model/task'
 import React from "react"
 import { useTaskState } from 'state-management/task'
@@ -52,7 +52,6 @@ const Quadrant = (p: QuadrantProps) => {
                         resolveTask,
                         onTaskDragStart,
                         updateTask,
-                        colorMap[p.type]
                     )}
                 </Box>
             </Box>
@@ -67,15 +66,13 @@ const renderTasks = (
     onCancel: TaskCardProps["onCancel"],
     onDragStart: TaskCardProps["onDragStart"],
     onTaskChange: TaskCardProps["onTaskChange"],
-    color: TaskCardProps["color"]
 ) =>
     tasks
         .filter((t) => t.type === type)
         .map((t) => (
             <Box key={t.id} m={1}>
                 <Anim type="bounceIn">
-                    <TaskCard
-                        color={color}
+                    <TaskCardEdit
                         task={t}
                         onTaskChange={onTaskChange}
                         onResolved={onResolved}
